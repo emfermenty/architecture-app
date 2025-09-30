@@ -1,0 +1,35 @@
+﻿1 - грузовик
+2 - по морю
+3 - поездом
+4 - самолетом
+
+
+
+поезд
+{
+  "distance": 1000,
+  "weight": 100,
+  "volume": 50
+}
+
+грузовик
+{
+  "distance": 100,
+  "weight": 100,
+  "volume": 50
+}
+
+море
+{
+  "distance": 3000,
+  "weight": 80000,
+  "volume": 800
+}
+
+create
+{
+  "type": 1,
+  "distance": 3000,
+  "weight": 80000,
+  "volume": 800
+}
