@@ -15,20 +15,16 @@ public class VehicleController : ControllerBase
     {
         _vehicleService = vehicleService;
     }
+
     [HttpPost("create")]
-    public IActionResult CreateVehicle([FromBody] CreateVehicleCommandDto command)
+    public async Task<IActionResult> CreateVehicle([FromBody] CreateVehicleCommandDto command)
     {
         try
         {
             var vehicle = await _vehicleService.CreateAsync(command);
-            return Ok(new { 
-                Id = vehicle.Id,
-                VehicleType = vehicle.VehicleType,
-                Model = vehicle.Model,
-                VehicleInfo = vehicle.GetVehicleInfo()
-            });
+            return Ok(vehicle);
         }
-        catch (Exception ex)
+        catch (ArgumentException ex)
         {
             return BadRequest(new { error = ex.Message });
         }

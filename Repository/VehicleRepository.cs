@@ -35,7 +35,7 @@ public class VehicleRepository
         return vehicle.Id;
     }
 
-    public async Task CreateAsync(CreateVehicleCommandDto vehicle)
+    public async Task CreateAsync(Vehicle vehicle)
     {
         await _context.Vehicles.AddAsync(vehicle);
         await _context.SaveChangesAsync();

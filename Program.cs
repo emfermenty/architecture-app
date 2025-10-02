@@ -16,6 +16,7 @@ builder.Services.AddScoped<ShippingsRepository>();
 builder.Services.AddScoped<ShippingService>();
 
 builder.Services.AddScoped<VehicleRepository>();
+builder.Services.AddScoped<VehicleService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
