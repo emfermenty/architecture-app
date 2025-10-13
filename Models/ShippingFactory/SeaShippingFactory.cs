@@ -1,24 +1,28 @@
-﻿namespace architectureProject.Models.ShippingFactory;
+﻿using architectureProject.Models.enums;
+using architectureProject.Repository;
+
+namespace architectureProject.Models.ShippingFactory;
 
 public class SeaShippingFactory : IShippingFactory
 {
+    private readonly IVehicleRepository _vehicleRepository;
+
+    public SeaShippingFactory(IVehicleRepository vehicleRepository)
+    {
+        _vehicleRepository = vehicleRepository;
+    }
     public Shipping CreateShipping()
     {
         return new SeaShipping();
     }
-    public Vehicle CreateVehicle()
+    
+    public Vehicle? TakeOptimalVehicle()
     {
-        return new CargoShip
-        {
-            Id = Guid.NewGuid(),
-            Model = "Maersk Triple-E",
-            MaxWeight = 100000,
-            MaxVolume = 1000,
-            Speed = 25,
-            FuelConsumption = 200,
-        };
+        return _vehicleRepository.TakeVehicleByShipping(VehicleType);
     }
 
+    public ShippingType Type => ShippingType.Sea;
+    public VehicleType VehicleType => VehicleType.CargoShip;
     public double GetMaxWeight() => 100000;
     public double GetMaxVolume() => 1000;
 

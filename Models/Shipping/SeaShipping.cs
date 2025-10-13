@@ -20,5 +20,4 @@ public class SeaShipping : Shipping
         double days = (Distance / 500);
         return TimeSpan.FromDays(days);
     }
-    
 }

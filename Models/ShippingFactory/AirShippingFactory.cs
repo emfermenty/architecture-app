@@ -1,23 +1,26 @@
-﻿namespace architectureProject.Models.ShippingFactory;
+﻿using System.Security.AccessControl;
+using architectureProject.Models.enums;
+using architectureProject.Repository;
+
+namespace architectureProject.Models.ShippingFactory;
 
 public class AirShippingFactory : IShippingFactory
 {
+    private readonly IVehicleRepository _vehicleRepository;
+    public AirShippingFactory(IVehicleRepository vehicleRepository)
+    {
+        _vehicleRepository = vehicleRepository;
+    }
     public Shipping CreateShipping()
     {
         return new AirShipping();
     }
-    public Vehicle CreateVehicle()
+
+    public ShippingType Type => ShippingType.Air;
+    public VehicleType VehicleType => VehicleType.CargoPlain;
+    public Vehicle? TakeOptimalVehicle()
     {
-        var random = new Random();
-        return new CargoPlain
-        {
-            Id = Guid.NewGuid(),
-            Model = "Boeing 747-8F",
-            MaxWeight = 100,
-            MaxVolume = 10,
-            Speed = 800,
-            FuelConsumption = 12000,
-        };
+        return _vehicleRepository.TakeVehicleByShipping(VehicleType);
     }
     public double GetMaxVolume() => 100;
     public double GetMaxWeight() => 10;

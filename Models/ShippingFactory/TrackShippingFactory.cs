@@ -1,24 +1,26 @@
-﻿namespace architectureProject.Models.ShippingFactory;
+﻿using architectureProject.Models.enums;
+using architectureProject.Repository;
+
+namespace architectureProject.Models.ShippingFactory;
 
 public class TrackShippingFactory : IShippingFactory
 {
+    private readonly IVehicleRepository _vehicleRepository;
+
+    public TrackShippingFactory(IVehicleRepository vehicleRepository)
+    {
+        _vehicleRepository = vehicleRepository;
+    }
     public Shipping CreateShipping()
     {
         return new TruckShipping();
     }
-    public Vehicle CreateVehicle()
+    public Vehicle? TakeOptimalVehicle()
     {
-        var random = new Random();
-        return new Truck 
-        { 
-            Id = Guid.NewGuid(),
-            Model = "Volvo FH16",
-            MaxWeight = 25000,
-            MaxVolume = 90,
-            Speed = 80,
-            FuelConsumption = 35,
-        };
+        return _vehicleRepository.TakeVehicleByShipping(VehicleType);
     }
+    public VehicleType VehicleType => VehicleType.Truck;
+    public ShippingType Type => ShippingType.Truck;
     public double GetMaxWeight() => 25000;
     public double GetMaxVolume() => 90;
 

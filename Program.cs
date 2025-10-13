@@ -1,9 +1,12 @@
-using architectureProject.Components;
 using architectureProject.Data;
+using architectureProject.Models;
+using architectureProject.Models.ShippingFactory;
 using architectureProject.Repository;
+using architectureProject.Repository.Decorators;
 using architectureProject.ServiceControllers;
 using architectureProject.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +14,28 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
 
-builder.Services.AddScoped<ShippingOptimizer>();
-builder.Services.AddScoped<ShippingsRepository>();
-builder.Services.AddScoped<ShippingService>();
+builder.Services.AddStackExchangeRedisCache(options => {
+    options.Configuration = "localhost";
+    options.InstanceName = "local";
+});
 
-builder.Services.AddScoped<VehicleRepository>();
+builder.Services.AddScoped<IShippingsRepository, ShippingsRepository>();
+builder.Services.AddScoped<IShippingsRepository>(sp =>
+{
+    var repo = sp.GetRequiredService<ShippingsRepository>(); // исходный
+    var cache = sp.GetRequiredService<IDistributedCache>();
+    return new CachedShippingsRepository(repo, cache); // оборачиваем
+});
+//builder.Services.Decorate<IShippingsRepository, CachedShippingsRepository>();
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+
+builder.Services.AddScoped<IShippingFactory, AirShippingFactory>();
+builder.Services.AddScoped<IShippingFactory, TrackShippingFactory>();
+builder.Services.AddScoped<IShippingFactory, TrainShippingFactory>();
+builder.Services.AddScoped<IShippingFactory, SeaShippingFactory>();
+
+builder.Services.AddScoped<ShippingOptimizer>();
+builder.Services.AddScoped<ShippingService>();
 builder.Services.AddScoped<VehicleService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>

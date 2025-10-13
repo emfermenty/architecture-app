@@ -9,15 +9,9 @@ public class ShippingOptimizer
 {
     private readonly Dictionary<ShippingType, IShippingFactory> _factories;
 
-    public ShippingOptimizer()
+    public ShippingOptimizer(IEnumerable<IShippingFactory> factories)
     {
-        _factories = new Dictionary<ShippingType, IShippingFactory>
-        {
-            [ShippingType.Truck] = new TrackShippingFactory(),
-            [ShippingType.Air] = new AirShippingFactory(),
-            [ShippingType.Train] = new TrainShippingFactory(),
-            [ShippingType.Sea] = new SeaShippingFactory()
-        };
+        _factories = factories.ToDictionary(f => f.Type);
     }
     public Shipping? SelectOptimalShipping(ShippingRequest request)
     {
@@ -25,14 +19,15 @@ public class ShippingOptimizer
         
         foreach (var factory in _factories.Values)
         {
-            if (factory.ValidateShipping(request.Distance, request.Weight, request.Volume))
-            {
-                var shipping = factory.CreateShipping();
-                shipping.Distance = request.Distance;
-                shipping.Weight = request.Weight;
-                shipping.Volume = request.Volume;
-                availableOptions.Add(shipping);
-            }
+            if (!factory.ValidateShipping(request.Distance, request.Weight, request.Volume))
+                continue;
+
+            var shipping = factory.CreateShipping();
+            shipping.Distance = request.Distance;
+            shipping.Weight = request.Weight;
+            shipping.Volume = request.Volume;
+
+            availableOptions.Add(shipping);
         }
         
         return availableOptions.OrderBy(s => 

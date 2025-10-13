@@ -7,9 +7,9 @@ namespace architectureProject.ServiceControllers;
 
 public class VehicleService
 {
-    private readonly VehicleRepository _vehicleRepository;
+    private readonly IVehicleRepository _vehicleRepository;
 
-    public VehicleService(VehicleRepository vehicleRepository)
+    public VehicleService(IVehicleRepository vehicleRepository)
     {
         _vehicleRepository = vehicleRepository;
     }
@@ -20,6 +20,7 @@ public class VehicleService
             VehicleType.Truck => new Truck(),
             VehicleType.CargoShip => new CargoShip(),
             VehicleType.CargoPlain => new CargoPlain(),
+            VehicleType.FreightTrain => new FreightTrain(),
             _ => throw new ArgumentException("Unsupported vehicle type")
         };
         vehicle.Id = Guid.NewGuid(); 
@@ -29,6 +30,7 @@ public class VehicleService
         vehicle.Speed = vehicledto.Speed;
         vehicle.FuelConsumption = vehicledto.FuelConsumption;
         vehicle.VehicleType = vehicledto.VehicleType;
+        Console.WriteLine(vehicle.ToString());
         await _vehicleRepository.CreateAsync(vehicle);
         return vehicle;
     }

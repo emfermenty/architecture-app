@@ -1,11 +1,12 @@
 ﻿using architectureProject.Data;
 using architectureProject.DTO;
 using architectureProject.Models;
+using architectureProject.Models.enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace architectureProject.Repository;
 
-public class VehicleRepository
+public class VehicleRepository : IVehicleRepository
 {
     private readonly ApplicationContext _context;
 
@@ -26,6 +27,13 @@ public class VehicleRepository
         return await _context.Vehicles
             .AsNoTracking()
             .FirstOrDefaultAsync(v => v.Id == id);
+    }
+
+    public Vehicle? TakeVehicleByShipping(VehicleType shippingType)
+    {
+        var vehicle = _context.Vehicles
+            .FirstOrDefault(v => v.VehicleType == shippingType);
+        return vehicle;
     }
     public async Task<Guid> DeleteAsync(Guid id)
     {

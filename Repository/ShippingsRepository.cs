@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace architectureProject.Repository;
 
-public class ShippingsRepository
+public class ShippingsRepository : IShippingsRepository
 {
     private readonly ApplicationContext _context;
 
@@ -13,13 +13,13 @@ public class ShippingsRepository
         _context = context;
     }
 
-    public async Task<List<Shipping>> GetAllShippingsAsync()
+    public List<Shipping> GetAllShippingsAsync()
     {
-        return await _context.Shippings
+        return _context.Shippings
             .AsNoTracking()
-            .ToListAsync();
+            .ToList();
     }
-
+    
     public async Task<Shipping?> GetShippingAsync(Guid id)
     {
         return await  _context.Shippings

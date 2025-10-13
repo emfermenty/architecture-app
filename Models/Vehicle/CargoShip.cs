@@ -11,9 +11,8 @@ public class CargoShip : Vehicle
     public override double CalculateOperatingCost(double distance)
     {
         double fuelCost = (distance / 100) * FuelConsumption * 0.8;
-        double crewCost = (distance / 500) * 2000;
-        double portFees = (distance / 1000) * 5000;
-        return fuelCost + crewCost + portFees;
+        double portFees = (distance / 1000) * 3000;
+        return fuelCost + portFees;
     }
     public override string GetVehicleInfo()
     {

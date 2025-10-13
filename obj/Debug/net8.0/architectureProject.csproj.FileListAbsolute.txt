@@ -142,3 +142,7 @@ C:\Users\demra\RiderProjects\architectureProject\architectureProject\bin\Debug\n
 C:\Users\demra\RiderProjects\architectureProject\architectureProject\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
 C:\Users\demra\RiderProjects\architectureProject\architectureProject\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\demra\RiderProjects\architectureProject\architectureProject\obj\Debug\net8.0\architectureProject.sourcelink.json
+C:\Users\demra\RiderProjects\architectureProject\architectureProject\bin\Debug\net8.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+C:\Users\demra\RiderProjects\architectureProject\architectureProject\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\demra\RiderProjects\architectureProject\architectureProject\bin\Debug\net8.0\Scrutor.dll
+C:\Users\demra\RiderProjects\architectureProject\architectureProject\bin\Debug\net8.0\StackExchange.Redis.dll
