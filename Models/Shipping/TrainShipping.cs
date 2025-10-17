@@ -1,10 +1,11 @@
 ﻿using architectureProject.Models.enums;
+using architectureProject.Models.ShippingImplimitation;
 
 namespace architectureProject.Models;
 
 public class TrainShipping : Shipping
 {
-    public TrainShipping()
+    public TrainShipping() : base(new TrainShippingImplimentation())
     {
         Id = Guid.NewGuid();
         ShippingType = ShippingType.Train;

@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using architectureProject.Models.enums;
+using architectureProject.Models.ShippingImplimitation;
 
 namespace architectureProject.Models;
 
@@ -10,6 +11,7 @@ namespace architectureProject.Models;
 [JsonDerivedType(typeof(TruckShipping), "TruckShipping")]
 public abstract class Shipping
 {
+    protected readonly IShippingImplementation implementation;
     public Guid Id { get; set; }
     public string TrackingNumber { get; set; } = null!;
     public double Distance { get; set; }
@@ -21,7 +23,20 @@ public abstract class Shipping
     public Guid VehicleId { get; set; }
     public Vehicle Vehicle { get; set; } = null!;
     public string TypeDescription { get; set; } = null!;
+    
+    public virtual double CalculateCost()
+    {
+        return implementation.CalculateCost(Distance, Weight, Volume);
+    }
 
-    public abstract double CalculateCost();
-    public abstract TimeSpan CalculateDuration();
+    public virtual TimeSpan CalculateDuration()
+    {
+        return implementation.CalculateDuration(Distance);
+    }
+    protected Shipping(IShippingImplementation implementation)
+    {
+        this.implementation = implementation;
+        Id = Guid.NewGuid();
+    }
+
 }

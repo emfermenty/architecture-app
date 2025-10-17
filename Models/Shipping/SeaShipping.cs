@@ -1,10 +1,11 @@
 ﻿using architectureProject.Models.enums;
+using architectureProject.Models.ShippingImplimitation;
 
 namespace architectureProject.Models;
 
 public class SeaShipping : Shipping
 {
-    public SeaShipping()
+    public SeaShipping() : base(new SeaShippingImplimentation())
     {
         Id = Guid.NewGuid();
         ShippingType = ShippingType.Sea;
