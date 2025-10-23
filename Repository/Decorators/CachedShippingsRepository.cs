@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using architectureProject.DTO;
 using architectureProject.Models;
 using architectureProject.Models.enums;
 using Microsoft.Extensions.Caching.Distributed;
@@ -16,13 +17,13 @@ public class CachedShippingsRepository : IShippingsRepository
         _cache = distributedCache;
     }
     
-    public List<Shipping> GetAllShippingsAsync()
+    public List<ShippingDto?> GetAllShippingsAsync()
     {
         const string cachekey = "all_shippings_cache";
         var cachedata = _cache.GetString(cachekey);
         if (cachedata != null) {
             Console.WriteLine("Данные получены из кэша");
-            return JsonSerializer.Deserialize<List<Shipping>>(cachedata);
+            return JsonSerializer.Deserialize<List<ShippingDto?>>(cachedata);
         }
         Console.WriteLine("Данные получены из базы данных");
         var data = _shippingsRepository.GetAllShippingsAsync();

@@ -97,7 +97,7 @@ public class LogisticsFacade
         return shipping;
     }
     
-    public List<Shipping> GetAllShippingsAsync()
+    public List<ShippingDto?> GetAllShippingsAsync()
     {
         return _shippingsRepository.GetAllShippingsAsync();
     }

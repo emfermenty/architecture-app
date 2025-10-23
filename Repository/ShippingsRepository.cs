@@ -1,4 +1,5 @@
 ﻿using architectureProject.Data;
+using architectureProject.DTO;
 using architectureProject.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +14,25 @@ public class ShippingsRepository : IShippingsRepository
         _context = context;
     }
 
-    public List<Shipping> GetAllShippingsAsync()
+    public List<ShippingDto?> GetAllShippingsAsync()
     {
         return _context.Shippings
             .AsNoTracking()
+            .Include(v => v.Vehicle)
+            .Select(s => new ShippingDto
+            {
+                Id = s.Id,
+                TrackingNumber = s.TrackingNumber,
+                Distance = s.Distance,
+                Weight = s.Weight,
+                Volume = s.Volume,
+                ShippingType = s.ShippingType,
+                Cost = s.Cost,
+                Duration = s.Duration,
+                VehicleId = s.VehicleId,
+                VehicleModel = s.Vehicle != null ? s.Vehicle.Model : "No Vehicle",
+                TypeDescription = s.TypeDescription
+            })
             .ToList();
     }
     

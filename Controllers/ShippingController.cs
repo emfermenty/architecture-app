@@ -44,14 +44,29 @@ public class ShippingController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("create-with-vehicle")]
-    public IActionResult CreateShippingWithVehicle([FromBody] CreateShippingCommand command)
+    [HttpPost("with-vehicle-async")]
+    public async Task<ActionResult<object>> CreateShippingWithVehicleAsync([FromBody] CreateShippingCommand command)
     {
-        var result = _shippingService.CreateShippingWithVehicle(command);
-        if (result == null)
-            return BadRequest("Невозможно создать перевозку с транспортом.");
-
-        return Ok(result);
+        try
+        {
+            var result = await _shippingService.CreateShippingWithVehicleAsync(command);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+    [HttpPost("undo")]
+    public async Task<ActionResult> Undo()
+    {
+        if (_shippingService.CanUndo)
+        {
+            await _shippingService.UndoLastCommandAsync();
+            return Ok("Last operation undone");
+        }
+        
+        return BadRequest("No commands to undo");
     }
 
     [HttpGet("GetAllShippings")]

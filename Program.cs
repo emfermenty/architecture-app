@@ -18,15 +18,11 @@ builder.Services.AddStackExchangeRedisCache(options => {
     options.Configuration = "localhost";
     options.InstanceName = "local";
 });
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IShippingsRepository, ShippingsRepository>();
-builder.Services.AddScoped<IShippingsRepository>(sp =>
-{
-    var repo = sp.GetRequiredService<ShippingsRepository>(); // исходный
-    var cache = sp.GetRequiredService<IDistributedCache>();
-    return new CachedShippingsRepository(repo, cache); // оборачиваем
-});
-//builder.Services.Decorate<IShippingsRepository, CachedShippingsRepository>();
+builder.Services.Decorate<IShippingsRepository, CachedShippingsRepository>();
+
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 
 builder.Services.AddScoped<IShippingFactory, AirShippingFactory>();
@@ -37,6 +33,11 @@ builder.Services.AddScoped<IShippingFactory, SeaShippingFactory>();
 builder.Services.AddScoped<ShippingOptimizer>();
 builder.Services.AddScoped<ShippingService>();
 builder.Services.AddScoped<VehicleService>();
+
+//builder.Services.AddTransient<CreateShippingWithVehicleCommand>();
+//builder.Services.AddTransient<GetOptimalShippingCommand>();
+
+builder.Services.AddScoped<CommandHandler>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {

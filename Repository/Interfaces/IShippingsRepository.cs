@@ -1,10 +1,11 @@
-﻿using architectureProject.Models;
+﻿using architectureProject.DTO;
+using architectureProject.Models;
 
 namespace architectureProject.Repository;
 
 public interface IShippingsRepository
 {
-    List<Shipping> GetAllShippingsAsync();
+    List<ShippingDto?> GetAllShippingsAsync();
     Task<Shipping?> GetShippingAsync(Guid id);
     Task<Guid> DeleteShippingAsync(Guid id);
     Task UpdateShippingAsync(Shipping shipping);

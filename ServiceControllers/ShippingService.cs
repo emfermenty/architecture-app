@@ -1,28 +1,60 @@
 ﻿using architectureProject.DTO;
 using architectureProject.Models;
 using architectureProject.Models.enums;
-using architectureProject.Models.ShippingFactory;
+using architectureProject.Models.Observer.Interfaces;
 using architectureProject.Repository;
 using architectureProject.Services;
-
-namespace architectureProject.ServiceControllers;
 
 public class ShippingService
 {
     private readonly IShippingsRepository _shippingsRepository;
     private readonly ShippingOptimizer _shippingOptimizer;
     private readonly IReadOnlyDictionary<ShippingType, IShippingFactory> _factories;
+    private readonly CommandHandler _commandHandler;
+    private readonly IObserverManager _observerManager;
 
     public ShippingService(
         IShippingsRepository shippingsRepository,
         ShippingOptimizer shippingOptimizer,
-        IEnumerable<IShippingFactory> factories)
+        IEnumerable<IShippingFactory> factories,
+        CommandHandler commandHandler,
+        IObserverManager observerManager)
     {
         _shippingsRepository = shippingsRepository;
         _shippingOptimizer = shippingOptimizer;
         _factories = factories.ToDictionary(f => f.Type);
+        _commandHandler = commandHandler;
+        _observerManager = observerManager;
     }
     
+    public async Task<object?>  CreateShippingWithVehicleAsync(CreateShippingCommand command)
+    {
+        var createCommand = new CreateShippingWithVehicleCommand(
+            command, 
+            _factories, 
+            _shippingsRepository,
+            _observerManager);
+        
+        await _commandHandler.HandleAsync(createCommand);
+        return createCommand.Result;
+    }
+
+    public async Task<ShippingQuotesDto> GetOptimalShippingAsync(ShippingRequest request)
+    {
+        var command = new GetOptimalShippingCommand(request, _shippingOptimizer);
+        await _commandHandler.HandleAsync(command);
+        return command.Result;
+    }
+
+    // Методы для Undo
+    public async Task UndoLastCommandAsync()
+    {
+        await _commandHandler.UndoAsync();
+    }
+
+    public bool CanUndo => _commandHandler.CanUndo;
+
+    // ВАШИ СТАРЫЕ МЕТОДЫ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ
     public ShippingQuotesDto GetOptimalShipping(ShippingRequest request)
     {
         var optimalShipping = _shippingOptimizer.SelectOptimalShipping(request);
@@ -43,17 +75,6 @@ public class ShippingService
     public List<ShippingQuote> GetShippingQuotes(ShippingRequest request)
     {
         return _shippingOptimizer.GetShippingQuotes(request);
-    }
-    private string GetShippingDescription(ShippingType type)
-    {
-        return type switch
-        {
-            ShippingType.Truck => "Грузовик",
-            ShippingType.Sea => "По морю",
-            ShippingType.Train => "Поездом",
-            ShippingType.Air => "Самолетом",
-            _ => "Неизвестный тип перевозки"
-        };
     }
 
     public ShippingDto? CreateShipping(CreateShippingCommand command)
@@ -81,8 +102,10 @@ public class ShippingService
         };
         return dto;
     }
+
     public object? CreateShippingWithVehicle(CreateShippingCommand command)
     {
+        // Старая синхронная версия для обратной совместимости
         if (!_factories.TryGetValue(command.Type, out var factory))
             throw new ArgumentException($"Неизвестный тип перевозки: {command.Type}");
  
@@ -93,7 +116,7 @@ public class ShippingService
         var vehicle = factory.TakeOptimalVehicle();
         shipping.Vehicle = vehicle;
         shipping.VehicleId = vehicle.Id;
-        shipping.Duration = shipping.Duration = TimeSpan.FromHours(command.Distance / vehicle.Speed);
+        shipping.Duration = TimeSpan.FromHours(command.Distance / vehicle.Speed);
         shipping.Id = Guid.NewGuid();
         shipping.Cost = shipping.CalculateCost();
         shipping.TrackingNumber = Guid.NewGuid().ToString()[..8].ToUpper();
@@ -106,8 +129,20 @@ public class ShippingService
         return shipping;
     }
 
-    public List<Shipping> GetAllShippings()
+    public List<ShippingDto?> GetAllShippings()
     {
         return _shippingsRepository.GetAllShippingsAsync();
+    }
+
+    private string GetShippingDescription(ShippingType type)
+    {
+        return type switch
+        {
+            ShippingType.Truck => "Грузовик",
+            ShippingType.Sea => "По морю",
+            ShippingType.Train => "Поездом",
+            ShippingType.Air => "Самолетом",
+            _ => "Неизвестный тип перевозки"
+        };
     }
 }
