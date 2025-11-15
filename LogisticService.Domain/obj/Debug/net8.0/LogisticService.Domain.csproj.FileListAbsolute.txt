@@ -1,0 +1,11 @@
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\bin\Debug\net8.0\LogisticService.Domain.deps.json
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\bin\Debug\net8.0\LogisticService.Domain.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\bin\Debug\net8.0\LogisticService.Domain.pdb
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\LogisticService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\LogisticService.Domain.AssemblyInfoInputs.cache
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\LogisticService.Domain.AssemblyInfo.cs
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\LogisticService.Domain.csproj.CoreCompileInputs.cache
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\LogisticService.Domain.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\refint\LogisticService.Domain.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\LogisticService.Domain.pdb
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\ref\LogisticService.Domain.dll

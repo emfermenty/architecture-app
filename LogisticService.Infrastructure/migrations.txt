@@ -1,0 +1,2 @@
+dotnet ef migrations add InitialCreate -p LogisticService.Infrastructure -s LogisticService.Api
+dotnet ef database update -p LogisticService.Infrastructure -s LogisticService.Api  

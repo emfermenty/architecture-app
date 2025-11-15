@@ -1,0 +1,17 @@
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\bin\Debug\net8.0\LogisticService.Infrastructure.deps.json
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\bin\Debug\net8.0\LogisticService.Infrastructure.runtimeconfig.json
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\bin\Debug\net8.0\LogisticService.Infrastructure.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\bin\Debug\net8.0\LogisticService.Infrastructure.pdb
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\bin\Debug\net8.0\LogisticService.Domain.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\bin\Debug\net8.0\LogisticService.Domain.pdb
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.AssemblyInfo.cs
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\Logistic.7F754E9A.Up2Date
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\refint\LogisticService.Infrastructure.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.pdb
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.genruntimeconfig.cache
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\ref\LogisticService.Infrastructure.dll
