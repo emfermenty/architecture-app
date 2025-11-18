@@ -10,7 +10,7 @@ public class GetOptimalShippingCommand : ICommand
     private readonly ShippingRequest _request;
     private readonly ShippingOptimizer _shippingOptimizer;
     
-    public ShippingQuotesDto Result { get; private set; }
+    public ShippingQuotesDto Result { get; internal set; }
 
     public GetOptimalShippingCommand(
         ShippingRequest request,

@@ -9,3 +9,5 @@ C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\refint\LogisticService.Domain.dll
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\LogisticService.Domain.pdb
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\ref\LogisticService.Domain.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\LogisticService.Domain.sourcelink.json
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Domain\obj\Debug\net8.0\LogisticService.Domain.csproj.AssemblyReference.cache

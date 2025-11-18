@@ -29,12 +29,14 @@ public class VehicleRepository : IVehicleRepository
             .ToList();
     }
 
-    public async Task<Vehicle?> GetAvailableVehiclesAsync(VehicleType type)
+    public async Task<List<Vehicle>> GetAvailableVehiclesAsync(VehicleType type)
     {
-        var entity = await _context.Vehicles
+        var entities = await _context.Vehicles
+            .AsNoTracking()
             .Where(x => x.VehicleType == type)
-            .FirstOrDefaultAsync();
-        return VehicleMapper.ToDomain(entity);
+            .ToListAsync(); 
+    
+        return entities.Select(VehicleMapper.ToDomain).ToList();
     }
     
     public async Task<Vehicle?> GetAsync(Guid id)
@@ -69,5 +71,18 @@ public class VehicleRepository : IVehicleRepository
     {
         _context.Vehicles.Update(VehicleMapper.ToEntity(vehicle));
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<Vehicle>> GetFreeVehiclesAsync(VehicleType vehicleType)
+    {
+        var freeVehicles = await _context.Vehicles
+            .Where(v => v.VehicleType == vehicleType)
+            .Where(v => !_context.Shippings
+                .Any(s => s.VehicleId == v.Id && 
+                          (s.Status == ShippingStatus.Created.ToString() || 
+                           s.Status == ShippingStatus.InTransit.ToString())))
+            .ToListAsync();
+
+        return freeVehicles.Select(VehicleMapper.ToDomain).ToList();
     }
 }

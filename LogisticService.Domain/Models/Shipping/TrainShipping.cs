@@ -13,7 +13,7 @@ public class TrainShipping : Abstract.Shipping
     
     public override double CalculateCost()
     {
-        double baseCost = Distance * 0.05; 
+        double baseCost = Distance * 0.15; 
         return baseCost;
     }
     public override TimeSpan CalculateDuration()

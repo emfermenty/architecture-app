@@ -9,4 +9,5 @@ public interface IShippingsRepository
     Task<Guid> DeleteShippingAsync(Guid id);
     Task UpdateShippingAsync(Shipping shipping);
     Task AddShippingAsync(Shipping shipping);
+    Task<Shipping?> GetByTrackingNumberAsync(string TrackingNumber);
 }

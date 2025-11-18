@@ -13,7 +13,7 @@ public class SeaShipping : Abstract.Shipping
     }
     public override double CalculateCost()
     {
-        double baseCost = Distance * 0.02; 
+        double baseCost = Distance * 0.02;
         double volumeCost = Volume * 15; 
         return baseCost + volumeCost;
     }

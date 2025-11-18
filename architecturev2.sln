@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogisticService.Domain", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogisticService.Infrastructure", "LogisticService.Infrastructure\LogisticService.Infrastructure.csproj", "{8656B5F4-3845-4588-A59B-797E8EDC0938}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogisticService.Tests", "LogisticService.Tests\LogisticService.Tests.csproj", "{0C68CC7C-DEBD-4DAF-B07F-645DAE2E4349}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{8656B5F4-3845-4588-A59B-797E8EDC0938}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8656B5F4-3845-4588-A59B-797E8EDC0938}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8656B5F4-3845-4588-A59B-797E8EDC0938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C68CC7C-DEBD-4DAF-B07F-645DAE2E4349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C68CC7C-DEBD-4DAF-B07F-645DAE2E4349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C68CC7C-DEBD-4DAF-B07F-645DAE2E4349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C68CC7C-DEBD-4DAF-B07F-645DAE2E4349}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

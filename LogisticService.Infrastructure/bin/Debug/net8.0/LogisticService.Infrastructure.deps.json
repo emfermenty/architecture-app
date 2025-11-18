@@ -773,6 +773,9 @@
       },
       "System.Threading.Channels/7.0.0": {},
       "LogisticService.Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0"
+        },
         "runtime": {
           "LogisticService.Domain.dll": {
             "assemblyVersion": "1.0.0",

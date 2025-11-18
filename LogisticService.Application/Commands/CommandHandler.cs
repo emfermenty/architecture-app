@@ -2,11 +2,11 @@
 
 namespace LogisticService.Application.Commands;
 
-public class CommandHandler
+public class CommandHandler : ICommandHandler
 {
     private readonly Stack<ICommand> _executedCommands = new();
 
-    public async Task HandleAsync(ICommand command)
+    public async Task HandleAsync<T>(T command) where T : ICommand
     {
         try
         {
@@ -39,5 +39,5 @@ public class CommandHandler
         }
     }
 
-    public bool CanUndo => _executedCommands.Count > 0;
+    public virtual bool CanUndo => _executedCommands.Count > 0;
 }

@@ -15,3 +15,4 @@ C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\obj\Debu
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\obj\Debug\net8.0\refint\LogisticService.Application.dll
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\obj\Debug\net8.0\LogisticService.Application.pdb
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\obj\Debug\net8.0\ref\LogisticService.Application.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\obj\Debug\net8.0\LogisticService.Application.sourcelink.json

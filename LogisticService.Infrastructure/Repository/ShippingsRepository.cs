@@ -51,4 +51,11 @@ public class ShippingsRepository : IShippingsRepository
         _context.Shippings.Add(entity);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<Shipping?> GetByTrackingNumberAsync(string TrackingNumber)
+    {
+        var entitry = await _context.Shippings
+            .FirstOrDefaultAsync(s => s.TrackingNumber == TrackingNumber);
+        return ShippingMapper.ToDomain(entitry);
+    }
 }

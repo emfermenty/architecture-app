@@ -16,7 +16,8 @@ public class CreateShippingWithVehicleCommand : ICommand
     private readonly IObserverManager _observerManager;
     private readonly IVehicleProvider _vehicleProvider;
 
-    public object? Result { get; private set; }
+    public object? Result { get; internal set; }
+    public void SetResult(object? value) => Result = value;
 
     public CreateShippingWithVehicleCommand(
         CreateShippingCommandDTO request,
@@ -55,7 +56,7 @@ public class CreateShippingWithVehicleCommand : ICommand
         var shipping = BuildShipping(factory, vehicle);
         RegisterObservers(shipping);
         await SaveAndNotifyAsync(shipping);
-
+        
         Result = shipping;
         Console.WriteLine($"Created shipping {shipping.TrackingNumber} with vehicle {vehicle.Id}");
     }
@@ -69,7 +70,7 @@ public class CreateShippingWithVehicleCommand : ICommand
     private Shipping BuildShipping(IShippingFactory factory, Vehicle vehicle)
     {
         var shipping = factory.CreateShipping();
-        shipping.Vehicle = vehicle;
+        //shipping.Vehicle = vehicle;
         shipping.VehicleId = vehicle.Id;
         shipping.Id = Guid.NewGuid();
         shipping.Distance = _request.Distance;
@@ -77,12 +78,22 @@ public class CreateShippingWithVehicleCommand : ICommand
         shipping.Volume = _request.Volume;
         shipping.Duration = TimeSpan.FromHours(_request.Distance / vehicle.Speed);
         shipping.Cost = shipping.CalculateCost();
-        shipping.TrackingNumber = $"TRK{Guid.NewGuid():N8}".ToUpper();
+        shipping.TrackingNumber = $"TRK{Guid.NewGuid():N}".ToUpper().Substring(0, 11);
         shipping.TypeDescription = GetShippingDescription(shipping.ShippingType);
         return shipping;
     }
 
-    private void RegisterObservers(Shipping shipping) => _observerManager.RegisterObservers(shipping);
+    private void RegisterObservers(Shipping shipping)
+    {
+        Console.WriteLine($"=== Before RegisterObservers ===");
+        Console.WriteLine($"Current observers: {shipping.GetObserverCount()}");
+    
+        _observerManager.RegisterObservers(shipping);
+    
+        Console.WriteLine($"=== After RegisterObservers ===");
+        Console.WriteLine($"Current observers: {shipping.GetObserverCount()}");
+        Console.WriteLine($"Observers: {string.Join(", ", shipping.GetObserverInfo())}");
+    }
 
     private async Task SaveAndNotifyAsync(Shipping shipping)
     {

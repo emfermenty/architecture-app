@@ -1,4 +1,5 @@
 ﻿using LogisticService.Application.Commands;
+using LogisticService.Application.Commands.interfaces;
 using LogisticService.Application.DTO;
 using LogisticService.Domain.Enums;
 using LogisticService.Domain.Models.Shipping.Abstract;
@@ -13,7 +14,7 @@ public class ShippingService
     private readonly IShippingsRepository _shippingsRepository;
     private readonly ShippingOptimizer _shippingOptimizer;
     private readonly IReadOnlyDictionary<ShippingType, IShippingFactory> _factories;
-    private readonly CommandHandler _commandHandler;
+    private readonly ICommandHandler _commandHandler;
     private readonly IObserverManager _observerManager;
     private readonly IVehicleProvider _vehicleProvider;
 
@@ -21,7 +22,7 @@ public class ShippingService
         IShippingsRepository shippingsRepository,
         ShippingOptimizer shippingOptimizer,
         IEnumerable<IShippingFactory> factories,
-        CommandHandler commandHandler,
+        ICommandHandler commandHandler,
         IObserverManager observerManager,
         IVehicleProvider vehicleProvider)
     {
@@ -32,8 +33,7 @@ public class ShippingService
         _observerManager = observerManager;
         _vehicleProvider = vehicleProvider;
     }
-
-    // Асинхронное создание shipping с транспортом через VehicleProvider
+    
     public async Task<object?> CreateShippingWithVehicleAsync(CreateShippingCommandDTO command)
     {
         var createCommand = new CreateShippingWithVehicleCommand(
@@ -102,6 +102,11 @@ public class ShippingService
 
     public async Task<List<Shipping>?> GetAllShippings() => await _shippingsRepository.GetAllShippingsAsync();
 
+    public async Task<Shipping?> GetByTrackingNumberAsync(string trackingNumber)
+    {
+        return await _shippingsRepository.GetByTrackingNumberAsync(trackingNumber);
+    }
+    
     private string GetShippingDescription(ShippingType type) => type switch
     {
         ShippingType.Truck => "Грузовик",

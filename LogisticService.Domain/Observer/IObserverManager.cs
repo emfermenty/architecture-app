@@ -5,4 +5,6 @@ namespace LogisticService.Domain.Observer;
 public interface IObserverManager
 {
     void RegisterObservers(Shipping shipping);
+    int GetObserverCount(); 
+    List<string> GetObserverNames(); 
 }

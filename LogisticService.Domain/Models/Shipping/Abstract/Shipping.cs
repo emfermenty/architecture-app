@@ -29,7 +29,7 @@ public abstract class Shipping : IShippingObservable
         }
     }
 
-    public DateTime? StartShipping { get; private set; } = DateTime.Now;
+    public DateTime? StartShipping { get; private set; } = DateTime.UtcNow;
     public Guid Id { get; set; }
     public string TrackingNumber { get; set; } = null!;
     public double Distance { get; set; }
@@ -97,5 +97,13 @@ public abstract class Shipping : IShippingObservable
     {
         this.implementation = implementation;
         Id = Guid.NewGuid();
+    }
+    public int GetObserverCount()
+    {
+        return _observers.Count;
+    }
+    public List<string> GetObserverInfo()
+    {
+        return _observers.Select(o => o.GetType().Name).ToList();
     }
 }
