@@ -10,7 +10,6 @@ namespace WebApplication1.Controllers;
 public class ShippingController : ControllerBase
 {
     private readonly ShippingService _shippingService;
-
     public ShippingController(ShippingService shippingService)
     {
         _shippingService = shippingService;
@@ -107,7 +106,6 @@ public class ShippingController : ControllerBase
     {
         try
         {
-            // Используем рефлексию чтобы получить список наблюдателей
             var observerManagerType = observerManager.GetType();
             var observersField = observerManagerType.GetField("_observers", 
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);

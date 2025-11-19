@@ -9,15 +9,14 @@
 
 using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogisticService.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20a3f91a700304874061d7a6728c4b7a569aa9c5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db27b850708f20edabadff1453820e075af4da92")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogisticService.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogisticService.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
-[assembly: InternalsVisibleTo("LogisticService.Tests")]
+
 // Создано классом WriteCodeFragment MSBuild.
 
