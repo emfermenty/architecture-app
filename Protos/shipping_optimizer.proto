@@ -1,0 +1,57 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "ShippingOptimization.Grpc";
+
+package shipping_optimization;
+
+service ShippingOptimizerService {
+  rpc SelectOptimalShipping (ShippingRequest) returns (ShippingResponse);
+  rpc GetShippingQuotes (ShippingRequest) returns (ShippingQuotesResponse);
+}
+
+message ShippingRequest {
+  double distance = 1;  
+  double weight = 2;    
+  double volume = 3;    
+}
+
+message ShippingResponse {
+  oneof result {
+    ShippingQuote optimal_shipping = 1;
+    Error error = 2;
+  }
+}
+
+message ShippingQuotesResponse {
+  repeated ShippingQuote quotes = 1;
+}
+
+message ShippingQuote {
+  ShippingType type = 1;           
+  double cost = 2;                
+  Duration duration = 3;         
+  double max_weight = 4;          
+  double max_volume = 5;          
+  string description = 6;         
+  repeated string requirements = 7;
+}
+
+message Duration {
+  int64 days = 1;
+  int64 hours = 2;
+  int64 minutes = 3;
+  int64 seconds = 4;
+  int64 milliseconds = 5;
+}
+
+message Error {
+  string message = 1;
+  string code = 2;
+}
+
+enum ShippingType {
+  TRUCK = 0;   
+  SEA = 1;     
+  TRAIN = 2;   
+  AIR = 3;     
+}

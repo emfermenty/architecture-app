@@ -1,0 +1,6 @@
+@gprcoptimizer_HostAddress = http://localhost:5122
+
+GET {{gprcoptimizer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
