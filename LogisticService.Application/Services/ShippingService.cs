@@ -5,14 +5,13 @@ using LogisticService.Domain.Enums;
 using LogisticService.Domain.Models.Shipping.Abstract;
 using LogisticService.Domain.Models.Shipping.ShippingFactory.Interfaces;
 using LogisticService.Domain.Observer;
-using LogisticService.Infrastructure.Repository.Interfaces;
 
 namespace LogisticService.Application.Services;
 
 public class ShippingService
 {
     private readonly IShippingsRepository _shippingsRepository;
-    private readonly ShippingOptimizer _shippingOptimizer;
+    private readonly IShippingOptimizer _shippingOptimizer;
     private readonly IReadOnlyDictionary<ShippingType, IShippingFactory> _factories;
     private readonly ICommandHandler _commandHandler;
     private readonly IObserverManager _observerManager;
@@ -20,7 +19,7 @@ public class ShippingService
 
     public ShippingService(
         IShippingsRepository shippingsRepository,
-        ShippingOptimizer shippingOptimizer,
+        IShippingOptimizer shippingOptimizer,
         IEnumerable<IShippingFactory> factories,
         ICommandHandler commandHandler,
         IObserverManager observerManager,

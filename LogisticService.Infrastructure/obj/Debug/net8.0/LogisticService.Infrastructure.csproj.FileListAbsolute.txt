@@ -16,3 +16,5 @@ C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\D
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.genruntimeconfig.cache
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\ref\LogisticService.Infrastructure.dll
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\obj\Debug\net8.0\LogisticService.Infrastructure.sourcelink.json
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\bin\Debug\net8.0\LogisticService.Application.dll
+C:\Users\demra\RiderProjects\architecturev2\LogisticService.Infrastructure\bin\Debug\net8.0\LogisticService.Application.pdb

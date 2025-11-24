@@ -2,7 +2,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\LogisticService.Domain\LogisticService.Domain.csproj" />
-      <ProjectReference Include="..\LogisticService.Infrastructure\LogisticService.Infrastructure.csproj" />
     </ItemGroup>
 
     <PropertyGroup>

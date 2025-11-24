@@ -7,13 +7,13 @@ namespace LogisticService.Application.Commands;
 public class GetAllShippingQuotesCommand : ICommand
 {
     private readonly ShippingRequest _request;
-    private readonly ShippingOptimizer _shippingOptimizer;
+    private readonly IShippingOptimizer _shippingOptimizer;
     
     public List<ShippingQuote> Result { get; private set; } = new();
 
     public GetAllShippingQuotesCommand(
         ShippingRequest request,
-        ShippingOptimizer shippingOptimizer)
+        IShippingOptimizer shippingOptimizer)
     {
         _request = request;
         _shippingOptimizer = shippingOptimizer;

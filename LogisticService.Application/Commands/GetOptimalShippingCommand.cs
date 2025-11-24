@@ -8,13 +8,13 @@ namespace LogisticService.Application.Commands;
 public class GetOptimalShippingCommand : ICommand
 {
     private readonly ShippingRequest _request;
-    private readonly ShippingOptimizer _shippingOptimizer;
+    private readonly IShippingOptimizer _shippingOptimizer;
     
     public ShippingQuotesDto Result { get; internal set; }
 
     public GetOptimalShippingCommand(
         ShippingRequest request,
-        ShippingOptimizer shippingOptimizer)
+        IShippingOptimizer shippingOptimizer)
     {
         _request = request;
         _shippingOptimizer = shippingOptimizer;

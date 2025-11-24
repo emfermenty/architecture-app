@@ -2,9 +2,7 @@ C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\bin\Debu
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\bin\Debug\net8.0\LogisticService.Application.dll
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\bin\Debug\net8.0\LogisticService.Application.pdb
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\bin\Debug\net8.0\LogisticService.Domain.dll
-C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\bin\Debug\net8.0\LogisticService.Infrastructure.dll
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\bin\Debug\net8.0\LogisticService.Domain.pdb
-C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\bin\Debug\net8.0\LogisticService.Infrastructure.pdb
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\obj\Debug\net8.0\LogisticService.Application.csproj.AssemblyReference.cache
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\obj\Debug\net8.0\LogisticService.Application.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\demra\RiderProjects\architecturev2\LogisticService.Application\obj\Debug\net8.0\LogisticService.Application.AssemblyInfoInputs.cache

@@ -1,7 +1,7 @@
 ﻿using LogisticService.Domain.Enums;
 using LogisticService.Domain.Models.Vehicle.Abstract;
 
-namespace LogisticService.Infrastructure.Repository;
+namespace LogisticService.Application.Services;
 
 public interface IVehicleRepository
 {

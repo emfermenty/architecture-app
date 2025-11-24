@@ -5,9 +5,12 @@ using LogisticService.Domain.Models.Shipping.ShippingFactory;
 using LogisticService.Domain.Models.Shipping.ShippingFactory.Interfaces;
 using LogisticService.Domain.Observer;
 using LogisticService.Infrastructure.Context;
+using LogisticService.Infrastructure.External;
 using LogisticService.Infrastructure.Repository;
-using LogisticService.Infrastructure.Repository.Interfaces;
+using LogisticService.Infrastructure.Repository;
+//using LogisticService.Infrastructure.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using ShippingOptimization.Grpc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,21 @@ builder.Services.AddStackExchangeRedisCache(options => {
 });
 
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddGrpcClient<ShippingOptimizerService.ShippingOptimizerServiceClient>(options =>
+    {
+        options.Address = new Uri("http://localhost:7000"); 
+    })
+    .ConfigurePrimaryHttpMessageHandler(() => 
+    {
+        var handler = new HttpClientHandler();
+    
+        // Разрешаем небезопасные соединения для разработки
+        handler.ServerCertificateCustomValidationCallback = 
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+    
+        return handler;
+    });
 
 builder.Services.AddTransient<IShippingObserver, DatabaseLoggingObserver>();
 
@@ -39,7 +57,8 @@ builder.Services.AddScoped<IShippingFactory, SeaShippingFactory>();
 
 builder.Services.AddScoped<IVehicleProvider, VehicleProvider>();
 builder.Services.AddScoped<ICommandHandler, CommandHandler>();
-builder.Services.AddScoped<ShippingOptimizer>();
+builder.Services.AddScoped<IShippingOptimizer, GrpcShippingOptimizer>();
+    //builder.Services.AddScoped<ShippingOptimizer>();
 builder.Services.AddScoped<ShippingService>();
 builder.Services.AddScoped<VehicleService>();
 

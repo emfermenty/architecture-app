@@ -1,7 +1,7 @@
-﻿using LogisticService.Domain.Models.Shipping.Abstract;
+﻿using LogisticService.Application.Services;
+using LogisticService.Domain.Models.Shipping.Abstract;
 using LogisticService.Infrastructure.Context;
 using LogisticService.Infrastructure.Mappers;
-using LogisticService.Infrastructure.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogisticService.Infrastructure.Repository;

@@ -1,9 +1,9 @@
-﻿using LogisticService.Domain.Enums;
+﻿using LogisticService.Application.Services;
+using LogisticService.Domain.Enums;
 using LogisticService.Domain.Models.Vehicle.Abstract;
 using LogisticService.Infrastructure.Context;
 using LogisticService.Infrastructure.Entity;
 using LogisticService.Infrastructure.Mappers;
-using LogisticService.Infrastructure.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogisticService.Infrastructure.Repository;

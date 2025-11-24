@@ -6,7 +6,6 @@ using LogisticService.Domain.Models.Shipping.Abstract;
 using LogisticService.Domain.Models.Shipping.ShippingFactory.Interfaces;
 using LogisticService.Domain.Models.Vehicle.Abstract;
 using LogisticService.Domain.Observer;
-using LogisticService.Infrastructure.Repository.Interfaces;
 
 public class CreateShippingWithVehicleCommand : ICommand
 {

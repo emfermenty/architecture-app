@@ -21,8 +21,7 @@ public class VehicleValidationRules
         MaxFuelConsumption = maxFuelConsumption;
         VehicleTypeName = vehicleTypeName;
     }
-
-    // Предопределенные правила для каждого типа транспорта
+    
     public static VehicleValidationRules Truck => new(25000, 120, 120, 50, "грузовика");
     public static VehicleValidationRules CargoShip => new(100000, 1000, 60, 70, "корабля");
     public static VehicleValidationRules CargoPlain => new(100000, 500, 1000, 8000, "самолета");

@@ -1,6 +1,6 @@
 ﻿using LogisticService.Domain.Models.Shipping.Abstract;
 
-namespace LogisticService.Infrastructure.Repository.Interfaces;
+namespace LogisticService.Application.Services;
 
 public interface IShippingsRepository
 {

@@ -1,15 +1,9 @@
-﻿using System.Text.Json.Serialization;
-using LogisticService.Domain.Enums;
+﻿using LogisticService.Domain.Enums;
 using LogisticService.Domain.Models.Shipping.Implimintation.Interfaces;
 using LogisticService.Domain.Observer;
 
 namespace LogisticService.Domain.Models.Shipping.Abstract;
 
-[JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
-[JsonDerivedType(typeof(AirShipping), "AirShipping")]
-[JsonDerivedType(typeof(TrainShipping), "TrainShipping")]
-[JsonDerivedType(typeof(SeaShipping), "SeaShipping")]
-[JsonDerivedType(typeof(TruckShipping), "TruckShipping")]
 public abstract class Shipping : IShippingObservable
 {
     protected readonly IShippingImplementation implementation;

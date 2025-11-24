@@ -1,0 +1,2 @@
+obj\Debug\net8.0\protos/ShippingOptimizer.cs \
+obj\Debug\net8.0\protos/ShippingOptimizerGrpc.cs: protos/shipping_optimizer.proto
