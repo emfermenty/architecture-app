@@ -5,6 +5,6 @@ namespace LogisticService.Application.Services;
 
 public interface IShippingOptimizer
 {
-    Shipping? SelectOptimalShipping(ShippingRequest request);
+    ShippingQuote? SelectOptimalShipping(ShippingRequest request);
     List<ShippingQuote> GetShippingQuotes(ShippingRequest request);
 }

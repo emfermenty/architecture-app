@@ -16,7 +16,7 @@ public class GrpcShippingOptimizer : IShippingOptimizer
         _client = client;
     }
 
-    public Shipping? SelectOptimalShipping(ShippingRequest request)
+    public ShippingQuote? SelectOptimalShipping(ShippingRequest request)
     {
         try
         {
@@ -31,7 +31,7 @@ public class GrpcShippingOptimizer : IShippingOptimizer
             
             if (response.ResultCase == global::ShippingOptimization.Grpc.ShippingResponse.ResultOneofCase.OptimalShipping)
             {
-                return GrpcShippingMapper.ToDomain(response.OptimalShipping);
+                return GrpcShippingMapper.ToDomainQuote(response.OptimalShipping);
             }
             
             return null;

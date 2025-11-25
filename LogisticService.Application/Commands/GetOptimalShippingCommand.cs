@@ -10,7 +10,7 @@ public class GetOptimalShippingCommand : ICommand
     private readonly ShippingRequest _request;
     private readonly IShippingOptimizer _shippingOptimizer;
     
-    public ShippingQuotesDto Result { get; internal set; }
+    public ShippingQuote Result { get; internal set; }
 
     public GetOptimalShippingCommand(
         ShippingRequest request,
@@ -34,15 +34,7 @@ public class GetOptimalShippingCommand : ICommand
         if (optimalShipping == null)
             throw new InvalidOperationException("No suitable shipping options found");
 
-        Console.WriteLine($"{optimalShipping.ShippingType} + {optimalShipping.TrackingNumber} + {optimalShipping.Distance} + {optimalShipping.Id}");
-
-        Result = new ShippingQuotesDto
-        {
-            ShippingType = optimalShipping.ShippingType,
-            Cost = optimalShipping.CalculateCost(),
-            Duration = optimalShipping.CalculateDuration(),
-            Description = GetShippingDescription(optimalShipping.ShippingType),
-        };
+        Result = optimalShipping;
     }
 
     public Task UndoAsync()

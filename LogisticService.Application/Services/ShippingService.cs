@@ -47,7 +47,7 @@ public class ShippingService
         return createCommand.Result;
     }
     
-    public async Task<ShippingQuotesDto> GetOptimalShippingAsync(ShippingRequest request)
+    public async Task<ShippingQuote> GetOptimalShippingAsync(ShippingRequest request)
     {
         var command = new GetOptimalShippingCommand(request, _shippingOptimizer);
         await _commandHandler.HandleAsync(command);
@@ -57,18 +57,12 @@ public class ShippingService
     public async Task UndoLastCommandAsync() => await _commandHandler.UndoAsync();
     public bool CanUndo => _commandHandler.CanUndo;
     
-    public ShippingQuotesDto GetOptimalShipping(ShippingRequest request)
+    public ShippingQuote GetOptimalShipping(ShippingRequest request)
     {
         var optimalShipping = _shippingOptimizer.SelectOptimalShipping(request)
             ?? throw new InvalidOperationException("Нет подходящих вариантов доставки.");
 
-        return new ShippingQuotesDto
-        {
-            ShippingType = optimalShipping.ShippingType,
-            Cost = optimalShipping.CalculateCost(),
-            Duration = optimalShipping.CalculateDuration(),
-            Description = GetShippingDescription(optimalShipping.ShippingType),
-        };
+        return optimalShipping;
     }
 
     public List<ShippingQuote> GetShippingQuotes(ShippingRequest request)
