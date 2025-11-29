@@ -1,4 +1,5 @@
 ﻿using LogisticService.Application.Services;
+using LogisticService.Domain.Enums;
 using LogisticService.Domain.Models.Shipping.Abstract;
 using LogisticService.Infrastructure.Context;
 using LogisticService.Infrastructure.Mappers;
@@ -18,18 +19,20 @@ public class ShippingsRepository : IShippingsRepository
     public async Task<List<Shipping>> GetAllShippingsAsync()
     {
         var entity = await _context.Shippings
+            .Where(s => s.Status == ShippingStatus.Created.ToString() ||
+                        s.Status == ShippingStatus.InTransit.ToString())
             .Include(x => x.Vehicle)
             .ToListAsync();
         return ShippingMapper.ToDomain(entity);
     }
-    
+
     public async Task<Shipping?> GetShippingAsync(Guid id)
     {
-        var entity =  await _context.Shippings
+        var entity = await _context.Shippings
             .FirstOrDefaultAsync(s => s.Id == id);
-        return  ShippingMapper.ToDomain(entity);
+        return ShippingMapper.ToDomain(entity);
     }
-    
+
     public async Task<Guid> DeleteShippingAsync(Guid id)
     {
         var shipping = await _context.Shippings.FindAsync(id);
@@ -57,5 +60,13 @@ public class ShippingsRepository : IShippingsRepository
         var entitry = await _context.Shippings
             .FirstOrDefaultAsync(s => s.TrackingNumber == TrackingNumber);
         return ShippingMapper.ToDomain(entitry);
+    }
+
+    public async Task ChangeStatusAsync(Shipping domain, string newStatus)
+    {
+        var entity = await _context.Shippings
+            .FirstAsync(x => x.Id == domain.Id); 
+        entity.Status = newStatus;
+        await _context.SaveChangesAsync();
     }
 }

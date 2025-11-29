@@ -49,8 +49,7 @@ public static class VehicleValidator
 
         if (fuelConsumption <= 0)
             throw new ArgumentException("Расход топлива должен быть больше 0");
-
-        // Валидация специфичных ограничений
+        
         Validate(rules, maxWeight, maxVolume, speed, fuelConsumption);
     }
 }

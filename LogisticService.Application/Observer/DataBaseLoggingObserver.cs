@@ -1,13 +1,20 @@
-﻿using LogisticService.Domain.Models.Shipping.Abstract;
+﻿using LogisticService.Application.Services;
+using LogisticService.Domain.Models.Shipping.Abstract;
 
 namespace LogisticService.Domain.Observer;
 
-public class DatabaseLoggingObserver : IShippingObserver
+public class DatabaseObserver : IShippingObserver
 {
+    private readonly IShippingsRepository _shippingRepository;
+
+    public DatabaseObserver(IShippingsRepository shippingRepository)
+    {
+        _shippingRepository = shippingRepository;
+    }
     public async Task OnShippingStatusChanged(Shipping shipping, string oldStatus, string newStatus)
     {
-        //await _shippingsRepository.LogStatusChangeAsync(shipping.Id, oldStatus, newStatus);
-        Console.WriteLine($"📝 DB Log: {shipping.TrackingNumber} {oldStatus} → {newStatus}");
+        await _shippingRepository.ChangeStatusAsync(shipping, newStatus);
+        Console.WriteLine($"📝 DB Log: {shipping.TrackingNumber} {oldStatus} TO {newStatus}");
     }
 
     public async Task OnShippingCreated(Shipping shipping)

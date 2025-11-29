@@ -1,6 +1,7 @@
 ﻿using LogisticService.Application.Commands;
 using LogisticService.Application.Commands.interfaces;
 using LogisticService.Application.DTO;
+using LogisticService.Application.ObjectStorage;
 using LogisticService.Domain.Enums;
 using LogisticService.Domain.Models.Shipping.Abstract;
 using LogisticService.Domain.Models.Shipping.ShippingFactory.Interfaces;
@@ -16,6 +17,7 @@ public class ShippingService
     private readonly ICommandHandler _commandHandler;
     private readonly IObserverManager _observerManager;
     private readonly IVehicleProvider _vehicleProvider;
+    private readonly ActiveShippingRegistry _registry;
 
     public ShippingService(
         IShippingsRepository shippingsRepository,
@@ -23,7 +25,8 @@ public class ShippingService
         IEnumerable<IShippingFactory> factories,
         ICommandHandler commandHandler,
         IObserverManager observerManager,
-        IVehicleProvider vehicleProvider)
+        IVehicleProvider vehicleProvider,
+        ActiveShippingRegistry registry)
     {
         _shippingsRepository = shippingsRepository;
         _shippingOptimizer = shippingOptimizer;
@@ -31,6 +34,7 @@ public class ShippingService
         _commandHandler = commandHandler;
         _observerManager = observerManager;
         _vehicleProvider = vehicleProvider;
+        _registry = registry;
     }
     
     public async Task<object?> CreateShippingWithVehicleAsync(CreateShippingCommandDTO command)
@@ -98,6 +102,22 @@ public class ShippingService
     public async Task<Shipping?> GetByTrackingNumberAsync(string trackingNumber)
     {
         return await _shippingsRepository.GetByTrackingNumberAsync(trackingNumber);
+    }
+
+    public async Task ChangeStatus(ChangeStatusDTO status)
+    {
+        var shipping = _registry.Get(status.trackingNumber);
+        if (shipping == null)
+        {
+            shipping = await _shippingsRepository.GetByTrackingNumberAsync(status.trackingNumber);
+            _registry.Add(shipping);
+            _observerManager.RegisterObservers(shipping);
+        }
+        await shipping.SetStatusAsync(status.shippingStatus.ToString());
+        if (shipping.Status == "Delivered" || shipping.Status == "Cancelled")
+        {
+            _registry.Remove(shipping);
+        }
     }
     
     private string GetShippingDescription(ShippingType type) => type switch

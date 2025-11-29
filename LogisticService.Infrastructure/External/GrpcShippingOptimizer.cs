@@ -1,6 +1,5 @@
 ﻿using ShippingOptimization.Grpc;
 using LogisticService.Application.Services;
-using LogisticService.Domain.Models.Shipping.Abstract;
 using ShippingQuote = LogisticService.Application.DTO.ShippingQuote;
 
 using ShippingRequest = LogisticService.Application.DTO.ShippingRequest;

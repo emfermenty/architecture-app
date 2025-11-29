@@ -1,5 +1,6 @@
 using LogisticService.Application.Commands;
 using LogisticService.Application.Commands.interfaces;
+using LogisticService.Application.ObjectStorage;
 using LogisticService.Application.Services;
 using LogisticService.Domain.Models.Shipping.ShippingFactory;
 using LogisticService.Domain.Models.Shipping.ShippingFactory.Interfaces;
@@ -7,8 +8,6 @@ using LogisticService.Domain.Observer;
 using LogisticService.Infrastructure.Context;
 using LogisticService.Infrastructure.External;
 using LogisticService.Infrastructure.Repository;
-using LogisticService.Infrastructure.Repository;
-//using LogisticService.Infrastructure.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ShippingOptimization.Grpc;
 
@@ -33,22 +32,22 @@ builder.Services.AddGrpcClient<ShippingOptimizerService.ShippingOptimizerService
     .ConfigurePrimaryHttpMessageHandler(() => 
     {
         var handler = new HttpClientHandler();
-    
-        // Разрешаем небезопасные соединения для разработки
+        
         handler.ServerCertificateCustomValidationCallback = 
             HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
     
         return handler;
     });
 
-builder.Services.AddTransient<IShippingObserver, DatabaseLoggingObserver>();
+builder.Services.AddSingleton<ActiveShippingRegistry>();
+
+builder.Services.AddTransient<IShippingObserver, DatabaseObserver>();
 
 builder.Services.AddScoped<IObserverManager, ObserverManager>();
 
 builder.Services.AddScoped<IShippingsRepository, ShippingsRepository>();
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 
-// Фабрики
 builder.Services.AddScoped<IShippingFactory, AirShippingFactory>();
 builder.Services.AddScoped<IShippingFactory, TruckShippingFactory>();
 builder.Services.AddScoped<IShippingFactory, TrainShippingFactory>();

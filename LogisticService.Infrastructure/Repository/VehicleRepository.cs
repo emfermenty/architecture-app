@@ -2,7 +2,6 @@
 using LogisticService.Domain.Enums;
 using LogisticService.Domain.Models.Vehicle.Abstract;
 using LogisticService.Infrastructure.Context;
-using LogisticService.Infrastructure.Entity;
 using LogisticService.Infrastructure.Mappers;
 using Microsoft.EntityFrameworkCore;
 

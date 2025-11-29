@@ -5,8 +5,6 @@ namespace LogisticService.Domain.Models.Vehicle;
 
 public class Truck : Abstract.Vehicle
 {
-    private const double MAX_TRUCK_WEIGHT = 25000; 
-    private const double MAX_TRUCK_VOLUME = 120;   
 
     public Truck(
         Guid id,

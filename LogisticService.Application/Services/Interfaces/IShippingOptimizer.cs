@@ -1,5 +1,4 @@
 ﻿using LogisticService.Application.DTO;
-using LogisticService.Domain.Models.Shipping.Abstract;
 
 namespace LogisticService.Application.Services;
 

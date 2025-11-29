@@ -1,6 +1,4 @@
-﻿using LogisticService.Domain.Models.Shipping;
-using LogisticService.Domain.Models.Shipping.Abstract;
-using DomainShippingType = LogisticService.Domain.Enums.ShippingType;
+﻿using DomainShippingType = LogisticService.Domain.Enums.ShippingType;
 using GrpcShippingType = ShippingOptimization.Grpc.ShippingType;
 using DomainQuote = LogisticService.Application.DTO.ShippingQuote;
 

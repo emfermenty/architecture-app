@@ -9,17 +9,18 @@ public abstract class Shipping : IShippingObservable
     protected readonly IShippingImplementation implementation;
     private readonly List<IShippingObserver> _observers = new();
     private string _status = ShippingStatus.Created.ToString();
-    public string Status 
-    { 
+    public string Status
+    {
         get => _status;
-        set
+        private set => _status = value;
+    }
+    public async Task SetStatusAsync(string newStatus)
+    {
+        if (_status != newStatus)
         {
-            if (_status != value)
-            {
-                var oldStatus = _status;
-                _status = value;
-                NotifyStatusChanged(oldStatus, value).Wait();
-            }
+            var old = _status;
+            _status = newStatus;
+            await NotifyStatusChanged(old, newStatus);
         }
     }
 

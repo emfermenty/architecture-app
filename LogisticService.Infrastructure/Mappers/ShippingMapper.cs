@@ -28,7 +28,7 @@ public static class ShippingMapper
         shipping.Duration = entity.Duration;
         shipping.VehicleId = entity.VehicleId;
         shipping.TypeDescription = entity.TypeDescription;
-        shipping.Status = entity.Status; 
+        shipping.SetStatusAsync(ShippingStatus.Created.ToString()); 
         
         if (entity.Vehicle != null)
         {

@@ -91,8 +91,8 @@ public class ShippingController : ControllerBase
         }
     }
 
-    [HttpGet("GetAllShippings")]
-    public async Task<ActionResult> GetAllShippings()
+    [HttpGet("GetAllActiveShippings")]
+    public async Task<ActionResult> GetAllActiveShippings()
     {
         var shippings = await _shippingService.GetAllShippings();
         if (shippings == null || shippings.Count == 0)
@@ -128,5 +128,12 @@ public class ShippingController : ControllerBase
         {
             return BadRequest(new { error = ex.Message });
         }
+    }
+
+    [HttpPost("ShippingChangeStatus")]
+    public async Task<ActionResult> ShippingChangeStatus([FromBody] ChangeStatusDTO changeStatus)
+    {
+        await _shippingService.ChangeStatus(changeStatus);
+        return Ok();
     }
 }

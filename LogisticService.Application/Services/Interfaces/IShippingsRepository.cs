@@ -10,4 +10,5 @@ public interface IShippingsRepository
     Task UpdateShippingAsync(Shipping shipping);
     Task AddShippingAsync(Shipping shipping);
     Task<Shipping?> GetByTrackingNumberAsync(string TrackingNumber);
+    Task ChangeStatusAsync(Shipping domain, string newStatus);
 }

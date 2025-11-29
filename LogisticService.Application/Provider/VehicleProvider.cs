@@ -1,6 +1,5 @@
 ﻿using LogisticService.Domain.Enums;
 using LogisticService.Domain.Models.Vehicle.Abstract;
-using LogisticService.Application.Services;
 
 namespace LogisticService.Application.Services;
 
